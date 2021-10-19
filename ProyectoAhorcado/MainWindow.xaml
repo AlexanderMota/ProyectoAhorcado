@@ -40,13 +40,15 @@
                 <Label x:Name="feedback"/>
             </Viewbox>
         </DockPanel>
-        <StackPanel
+        <DockPanel
             DockPanel.Dock="Left"
             Width="300">
             <Image 
-                Source="/img/9.jpg" 
+                Tag="0"
+                x:Name="Ahorcado"
+                Source="/img/0.jpg" 
                 Stretch="None"/>
-        </StackPanel>
+        </DockPanel>
         <DockPanel >
             <Label
                 DockPanel.Dock="Top"

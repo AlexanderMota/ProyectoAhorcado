@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace ProyectoAhorcado
 {
@@ -38,28 +39,29 @@ namespace ProyectoAhorcado
             char l = char.Parse(((Button)sender).Content.ToString());
             if(Plb.Contains(l))
             {
-                Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text, char.Parse(((Button)sender).Content.ToString()));
+                Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(((Button)sender).Content.ToString()));
             }
             else
             {
-                // hacer que cambie el muñeqioto
+                //Hacer que el muñeco cambie. Han surgido muchos problemas, no puedo hacerlo ahora mismo
             }
             if (!Respuestas.Text.Contains("_"))
             {
                 feedback.Content = "Has Ganado!";
-                //detectar cuando se gane
             }
         }
         private void Button_Click_Opciones(object sender, RoutedEventArgs e)
         {
-            ((Button)sender).IsEnabled = false;
             if ((((Button)sender).Equals(BRen)))
             {
                 this.Close();
             }
             else
             {
-                InitializeComponent();
+                Plb = PalabraRandom();
+                PlbMostrar = EscondePalabra(Plb);
+                Respuestas.Text = PlbMostrar;
+                CreaBotonesTeclado(teclado, (Style)Resources["StBTeclado"], 3, 9);
             }
         }
         public static String PalabraRandom()
@@ -108,20 +110,10 @@ namespace ProyectoAhorcado
                 }
             }
         }
-        static bool HaAcertado(string palabraMostrar, string palabraSecreta)
-        {
-            int i = 0; bool flag = false;
-            do
-            {
-                flag = palabraSecreta[i] == (i == 0 ? palabraMostrar[0] : palabraMostrar[i * 2]);
-                i++;
-            } while (flag == true && i < palabraSecreta.Length);
-            return flag;
-        }
         static String AñadeLetraAcertada(string palabraSecreta, String palabraMostrar, char letra)
         {
             StringBuilder pal = new StringBuilder(palabraMostrar);
-            for (int i = 0; i < palabraSecreta.Length; i++)
+            for (int i = 0; i < palabraSecreta.Length - 1; i++)
                 if (palabraSecreta[i] == letra) pal[i * 2] = letra;
             return pal.ToString();
         }
