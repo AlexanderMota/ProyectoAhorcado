@@ -40,9 +40,11 @@ namespace ProyectoAhorcado
             if(Plb.Contains(l))
             {
                 Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(((Button)sender).Content.ToString()));
+                feedback.Content = "Si está";
             }
             else
             {
+                feedback.Content = "No está";
                 //Hacer que el muñeco cambie. Han surgido muchos problemas, no puedo hacerlo ahora mismo
             }
             if (!Respuestas.Text.Contains("_"))
@@ -61,6 +63,7 @@ namespace ProyectoAhorcado
                 Plb = PalabraRandom();
                 PlbMostrar = EscondePalabra(Plb);
                 Respuestas.Text = PlbMostrar;
+                feedback.Content = "";
                 CreaBotonesTeclado(teclado, (Style)Resources["StBTeclado"], 3, 9);
             }
         }

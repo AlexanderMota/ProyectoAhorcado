@@ -32,7 +32,7 @@
                 Content="Reiniciar"/>
             <Button Style="{StaticResource StBOpc}"
                 Content="Rendirse"
-                    Name="BRen"/>
+                Name="BRen"/>
             <Viewbox  HorizontalAlignment="Right"
                 DockPanel.Dock="Right"
                 Height="40" Width="180"
