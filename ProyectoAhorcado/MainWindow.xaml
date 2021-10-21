@@ -50,7 +50,7 @@
             <Image 
                 Tag= "0"
                 x:Name="Ahorcado"
-                Source="/img/0.jpg"/>
+                Source="/img/0.jpg" Stretch="Fill"/>
         </DockPanel>
         <DockPanel >
             <Label

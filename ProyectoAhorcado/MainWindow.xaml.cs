@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Path = System.IO.Path;
 
 namespace ProyectoAhorcado
 {
@@ -32,15 +24,6 @@ namespace ProyectoAhorcado
             Reinicia();
             CreaBotonesTeclado(3, 9);
         }
-        private void CambiaFoto(int foto)
-        {
-            Ahorcado.Tag = foto;
-            BitmapImage logo = new BitmapImage();
-            logo.BeginInit();
-            logo.UriSource = new Uri(@"pack://application:,,,/img/" + foto + ".jpg");
-            logo.EndInit();
-            Ahorcado.Source = logo;
-        }
         private void Button_Click_Teclado(object sender, RoutedEventArgs e)
         {
             ((Button)sender).IsEnabled = false;
@@ -57,7 +40,7 @@ namespace ProyectoAhorcado
                     CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
                 else Perdiste();
             }
-            if (!Respuestas.Text.Contains("_")) feedback.Content = "Has Ganado!";
+            if (!Respuestas.Text.Contains("_")) Ganaste();
         }
         private void Button_Click_Opciones(object sender, RoutedEventArgs e)
         {
@@ -66,12 +49,12 @@ namespace ProyectoAhorcado
         }
         public void Ganaste()
         {
+            CambiaFoto(11);
             Ahorcado.Tag = 0;
             SwitchTeclado(false);
             feedback.Content = "Victoria!";
             BRen.Background = Brushes.Green;
             BRei.Background = Brushes.Green;
-            CambiaFoto(11);
         }
         public void Perdiste()
         {
@@ -92,6 +75,15 @@ namespace ProyectoAhorcado
             BRen.Background = Brushes.White;
             BRei.Background = Brushes.White;
             CreaBotonesTeclado(3, 9);
+        }
+        private void CambiaFoto(int foto)
+        {
+            Ahorcado.Tag = foto;
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+            logo.UriSource = new Uri(@"pack://application:,,,/img/" + foto + ".jpg");
+            logo.EndInit();
+            Ahorcado.Source = logo;
         }
         public String PalabraRandom()
         {
