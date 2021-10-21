@@ -21,6 +21,9 @@
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="25"/>
         </Style>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="Stretch" Value="None"/>
+        </Style>
     </Window.Resources>
     
     <DockPanel>
@@ -29,7 +32,8 @@
             Height="80"
             LastChildFill="False">
             <Button Style="{StaticResource StBOpc}"
-                Content="Reiniciar"/>
+                Content="Reiniciar"
+                Name="BRei"/>
             <Button Style="{StaticResource StBOpc}"
                 Content="Rendirse"
                 Name="BRen"/>
@@ -44,10 +48,9 @@
             DockPanel.Dock="Left"
             Width="300">
             <Image 
-                Tag="0"
+                Tag= "0"
                 x:Name="Ahorcado"
-                Source="/img/0.jpg" 
-                Stretch="None"/>
+                Source="/img/0.jpg"/>
         </DockPanel>
         <DockPanel >
             <Label

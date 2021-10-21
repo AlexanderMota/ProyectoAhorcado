@@ -22,16 +22,24 @@ namespace ProyectoAhorcado
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static String Plb;
-        private static String PlbMostrar;
+        private String Plb;
+        private String PlbMostrar;
         public MainWindow()
         {
             InitializeComponent();
             Plb = PalabraRandom();
             PlbMostrar = EscondePalabra(Plb);
-
-            Respuestas.Text = PlbMostrar;
-            CreaBotonesTeclado(teclado, (Style)Resources["StBTeclado"], 3, 9);
+            Reinicia();
+            CreaBotonesTeclado(3, 9);
+        }
+        private void CambiaFoto(int foto)
+        {
+            Ahorcado.Tag = foto;
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+            logo.UriSource = new Uri(@"pack://application:,,,/img/" + foto + ".jpg");
+            logo.EndInit();
+            Ahorcado.Source = logo;
         }
         private void Button_Click_Teclado(object sender, RoutedEventArgs e)
         {
@@ -45,43 +53,65 @@ namespace ProyectoAhorcado
             else
             {
                 feedback.Content = "No está";
-                //Hacer que el muñeco cambie. Han surgido muchos problemas, no puedo hacerlo ahora mismo
+                if (int.Parse(Ahorcado.Tag.ToString()) < 9) 
+                    CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
+                else Perdiste();
             }
-            if (!Respuestas.Text.Contains("_"))
-            {
-                feedback.Content = "Has Ganado!";
-            }
+            if (!Respuestas.Text.Contains("_")) feedback.Content = "Has Ganado!";
         }
         private void Button_Click_Opciones(object sender, RoutedEventArgs e)
         {
-            if ((((Button)sender).Equals(BRen)))
-            {
-                this.Close();
-            }
-            else
-            {
-                Plb = PalabraRandom();
-                PlbMostrar = EscondePalabra(Plb);
-                Respuestas.Text = PlbMostrar;
-                feedback.Content = "";
-                CreaBotonesTeclado(teclado, (Style)Resources["StBTeclado"], 3, 9);
-            }
+            if (((Button)sender).Equals(BRen)) this.Close();
+            else Reinicia();
         }
-        public static String PalabraRandom()
+        public void Ganaste()
+        {
+            Ahorcado.Tag = 0;
+            SwitchTeclado(false);
+            feedback.Content = "Victoria!";
+            BRen.Background = Brushes.Green;
+            BRei.Background = Brushes.Green;
+            CambiaFoto(11);
+        }
+        public void Perdiste()
+        {
+            Ahorcado.Tag = 0;
+            SwitchTeclado(false);
+            feedback.Content = "Has perdido.";
+            BRen.Background = Brushes.Red;
+            BRei.Background = Brushes.Red;
+            CambiaFoto(10);
+        }
+        public void Reinicia()
+        {
+            CambiaFoto(0);
+            Plb = PalabraRandom();
+            PlbMostrar = EscondePalabra(Plb);
+            Respuestas.Text = PlbMostrar;
+            feedback.Content = "";
+            BRen.Background = Brushes.White;
+            BRei.Background = Brushes.White;
+            CreaBotonesTeclado(3, 9);
+        }
+        public String PalabraRandom()
         {
             Random gen = new Random();
             String[] palabras = File.ReadAllText(@"./datos/palabras.txt").Split('\n');
             return palabras[gen.Next(0, palabras.Length)];
-
         }
-        public static String EscondePalabra(String cadena)
+        public String EscondePalabra(String cadena)
         {
-            string cadenaMostrar = "";
+            StringBuilder cadenaMostrar = new StringBuilder("");
             for (int i = 0; i < cadena.Length - 1; i++)
-                cadenaMostrar += i < cadena.Length - 1 ? "_ " : "_";
-            return cadenaMostrar;
+                cadenaMostrar.Append(i < cadena.Length - 1 ? "_ " : "_");
+            return cadenaMostrar.ToString();
         }
-        public static void CreaBotonesTeclado(Grid g, Style r,int fil, int col)
+        public void SwitchTeclado(bool s)
+        {
+            foreach (Button b in teclado.Children)
+                b.IsEnabled = s;
+        }
+        public void CreaBotonesTeclado(int fil, int col)
         {
             int l = 65;
             Button btt;
@@ -89,25 +119,13 @@ namespace ProyectoAhorcado
             {
                 for (int e = 0; e < col; e++)
                 {
-                    if (l == 80)
-                    {
-                        btt = new Button()
-                        {
-                            Style = (Style)r,
-                            Content = 'Ñ',
-                        };
-                        g.Children.Add(btt);
-                        Grid.SetColumn(btt, e);
-                        Grid.SetRow(btt, i);
-                        e++;
-                    }
                     btt = new Button()
                     {
-                        Style = (Style)r,
-                        Content = (char)l
+                        Style = (Style)Resources["StBTeclado"],
+                        Content = (l == 79 && e == 5? 'Ñ' : (char)l)
                     };
-                    g.Children.Add(btt);
-                    l++;
+                    teclado.Children.Add(btt);
+                    if (!btt.Content.Equals('Ñ')) l++;
                     Grid.SetColumn(btt,e);
                     Grid.SetRow(btt, i);
                 }
@@ -120,6 +138,5 @@ namespace ProyectoAhorcado
                 if (palabraSecreta[i] == letra) pal[i * 2] = letra;
             return pal.ToString();
         }
-
     }
 }
