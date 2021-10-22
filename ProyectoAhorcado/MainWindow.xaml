@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoAhorcado"
         mc:Ignorable="d"
-        Title="MainWindow" Height="475" Width="750"
+        Title="MainWindow" 
+        Height="475" Width="750"
+        MinHeight="500" MinWidth="800"
+        MaxHeight="1000" MaxWidth="1600"
         KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style TargetType="{x:Type DockPanel}" x:Key="StDp">
@@ -69,7 +72,7 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style TargetType="{x:Type Image}">
-            <Setter Property="Stretch" Value="None"/>
+            <Setter Property="Stretch" Value="Fill"/>
 
             <Setter Property="Effect">
                 <Setter.Value>
@@ -99,7 +102,7 @@
                 DockPanel.Dock="Right"
                 Height="40" Width="180"
                 Margin="10">
-                <Label x:Name="feedback"/>
+                <TextBlock x:Name="feedback"/>
             </Viewbox>
         </DockPanel>
         <DockPanel Style="{StaticResource StDp}"
@@ -108,7 +111,7 @@
             <Image 
                 Tag= "0"
                 x:Name="Ahorcado"
-                Source="/img/0.jpg" Stretch="Fill"/>
+                Source="/img/0.jpg"/>
         </DockPanel>
         <DockPanel Style="{StaticResource StDp}">
             <Label

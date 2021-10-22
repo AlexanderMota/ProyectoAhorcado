@@ -40,11 +40,11 @@ namespace ProyectoAhorcado
                 if (Plb.Contains(l))
                 {
                     Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(l));
-                    feedback.Content = "Si está";
+                    feedback.Text = "Si está";
                 }
                 else
                 {
-                    feedback.Content = "No está";
+                    feedback.Text = "No está";
                     if (int.Parse(Ahorcado.Tag.ToString()) < 9)
                         CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
                     else Perdiste();
@@ -59,11 +59,11 @@ namespace ProyectoAhorcado
             if(Plb.Contains(l))
             {
                 Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(((Button)sender).Tag.ToString()));
-                feedback.Content = "Si está";
+                feedback.Text = "Si está";
             }
             else
             {
-                feedback.Content = "No está";
+                feedback.Text = "No está";
                 if (int.Parse(Ahorcado.Tag.ToString()) < 9) 
                     CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
                 else Perdiste();
@@ -80,7 +80,7 @@ namespace ProyectoAhorcado
             CambiaFoto(11);
             Ahorcado.Tag = 0;
             SwitchTeclado(false);
-            feedback.Content = "Victoria!";
+            feedback.Text = "Victoria!";
             BRen.Background = Brushes.Green;
             BRei.Background = Brushes.Green;
             DPPrincipal.Style = (Style)Resources["StDpVictoria"];
@@ -89,7 +89,7 @@ namespace ProyectoAhorcado
         {
             Ahorcado.Tag = 0;
             SwitchTeclado(false);
-            feedback.Content = "Has perdido.";
+            feedback.Text = "Has perdido.";
             BRen.Background = Brushes.Red;
             BRei.Background = Brushes.Red;
             DPPrincipal.Style = (Style)Resources["StDpDerrota"];
@@ -101,7 +101,7 @@ namespace ProyectoAhorcado
             Plb = PalabraRandom();
             PlbMostrar = EscondePalabra(Plb);
             Respuestas.Text = PlbMostrar;
-            feedback.Content = "";
+            feedback.Text = "";
             BRen.Background = Brushes.White;
             BRei.Background = Brushes.White;
             DPPrincipal.Style = (Style)Resources["StDp"];
