@@ -11,6 +11,24 @@
         <Style TargetType="{x:Type DockPanel}">
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style BasedOn="{StaticResource {x:Type DockPanel}}" TargetType="{x:Type DockPanel}" x:Name="StDpVictoria">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF0CEEBA"/>
+                        <GradientStop Color="White" Offset="0.384"/>
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="{x:Type Button}" x:Key="StBTeclado">
             <EventSetter Event="Click" Handler="Button_Click_Teclado"/>
             <Setter Property="Margin" Value="2.5"/>
