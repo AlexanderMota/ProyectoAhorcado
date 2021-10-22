@@ -83,6 +83,7 @@ namespace ProyectoAhorcado
             feedback.Content = "Victoria!";
             BRen.Background = Brushes.Green;
             BRei.Background = Brushes.Green;
+            DPPrincipal.Style = (Style)Resources["StDpVictoria"];
         }
         public void Perdiste()
         {
@@ -91,6 +92,7 @@ namespace ProyectoAhorcado
             feedback.Content = "Has perdido.";
             BRen.Background = Brushes.Red;
             BRei.Background = Brushes.Red;
+            DPPrincipal.Style = (Style)Resources["StDpDerrota"];
             CambiaFoto(10);
         }
         public void Reinicia()
@@ -102,6 +104,7 @@ namespace ProyectoAhorcado
             feedback.Content = "";
             BRen.Background = Brushes.White;
             BRei.Background = Brushes.White;
+            DPPrincipal.Style = (Style)Resources["StDp"];
             CreaBotonesTeclado(3, 9);
         }
         private void CambiaFoto(int foto)

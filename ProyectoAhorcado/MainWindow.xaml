@@ -8,14 +8,32 @@
         Title="MainWindow" Height="475" Width="750"
         KeyDown="Window_KeyDown">
     <Window.Resources>
-        <Style TargetType="{x:Type DockPanel}">
+        <Style TargetType="{x:Type DockPanel}" x:Key="StDp">
             <Setter Property="Margin" Value="5"/>
         </Style>
-        <Style BasedOn="{StaticResource {x:Type DockPanel}}" TargetType="{x:Type DockPanel}" x:Name="StDpVictoria">
+        <Style BasedOn="{StaticResource StDp}" TargetType="{x:Type DockPanel}" x:Key="StDpVictoria">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF0CEEBA"/>
+                        <GradientStop Color="White" Offset="0.384"/>
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style BasedOn="{StaticResource StDp}" TargetType="{x:Type DockPanel}" x:Key="StDpDerrota">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEE0C0C"/>
                         <GradientStop Color="White" Offset="0.384"/>
                         <LinearGradientBrush.RelativeTransform>
                             <TransformGroup>
@@ -65,23 +83,9 @@
         </Style>
     </Window.Resources>
 
-    <DockPanel
-        >
-        <DockPanel.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <LinearGradientBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                        <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </LinearGradientBrush.RelativeTransform>
-                <GradientStop Color="#FF0CEEBA"/>
-                <GradientStop Color="White" Offset="0.384"/>
-            </LinearGradientBrush>
-        </DockPanel.Background>
-        <DockPanel
+    <DockPanel Style="{StaticResource StDp}"
+               x:Name="DPPrincipal">
+        <DockPanel Style="{StaticResource StDp}"
             DockPanel.Dock="Bottom"
             Height="80"
             LastChildFill="False">
@@ -98,7 +102,7 @@
                 <Label x:Name="feedback"/>
             </Viewbox>
         </DockPanel>
-        <DockPanel
+        <DockPanel Style="{StaticResource StDp}"
             DockPanel.Dock="Left"
             Width="300">
             <Image 
@@ -106,7 +110,7 @@
                 x:Name="Ahorcado"
                 Source="/img/0.jpg" Stretch="Fill"/>
         </DockPanel>
-        <DockPanel >
+        <DockPanel Style="{StaticResource StDp}">
             <Label
                 DockPanel.Dock="Top"
                 Content="Ahorcado" 
