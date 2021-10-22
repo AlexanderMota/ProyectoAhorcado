@@ -21,16 +21,44 @@ namespace ProyectoAhorcado
             InitializeComponent();
             Plb = PalabraRandom();
             PlbMostrar = EscondePalabra(Plb);
+
             Reinicia();
             CreaBotonesTeclado(3, 9);
+        }
+        /*private void CreaGrid()
+        {
+            Grid g = new Grid();
+            g.ColumnDefinitions.Add(new ColumnDefinition());
+        }*/
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            String l =e.Key.ToString();
+
+            if (CompruebaTecla(l))
+            {
+                ApagaTeclaTF(l);
+                if (Plb.Contains(l))
+                {
+                    Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(l));
+                    feedback.Content = "Si está";
+                }
+                else
+                {
+                    feedback.Content = "No está";
+                    if (int.Parse(Ahorcado.Tag.ToString()) < 9)
+                        CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
+                    else Perdiste();
+                }
+                if (!Respuestas.Text.Contains("_")) Ganaste();
+            }
         }
         private void Button_Click_Teclado(object sender, RoutedEventArgs e)
         {
             ((Button)sender).IsEnabled = false;
-            char l = char.Parse(((Button)sender).Content.ToString());
+            char l = char.Parse(((Button)sender).Tag.ToString());
             if(Plb.Contains(l))
             {
-                Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(((Button)sender).Content.ToString()));
+                Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(((Button)sender).Tag.ToString()));
                 feedback.Content = "Si está";
             }
             else
@@ -103,21 +131,44 @@ namespace ProyectoAhorcado
             foreach (Button b in teclado.Children)
                 b.IsEnabled = s;
         }
+        public void ApagaTeclaTF(String c)
+        {
+            foreach (Button b in teclado.Children)
+                if (b.Tag.ToString().Equals(c))
+                    b.IsEnabled = false;
+        }
+        public bool CompruebaTecla(String c)
+        {
+            foreach (Button b in teclado.Children)
+                if (b.Tag.ToString().Equals(c))
+                    return b.IsEnabled;
+            return false;
+        }
         public void CreaBotonesTeclado(int fil, int col)
         {
+            teclado.Children.Clear();
             int l = 65;
+            TextBlock tb;
+            Viewbox vb;
             Button btt;
             for (int i = 0; i < fil; i++)
             {
                 for (int e = 0; e < col; e++)
                 {
+                    tb = new TextBlock()
+                    {
+                        Text = (l == 79 && e == 5 ? 'Ñ' : (char)l).ToString()
+                    };
+                    vb = new Viewbox();
+                    vb.Child = tb;
                     btt = new Button()
                     {
                         Style = (Style)Resources["StBTeclado"],
-                        Content = (l == 79 && e == 5? 'Ñ' : (char)l)
+                        Content = vb,
+                        Tag = (l == 79 && e == 5 ? 'Ñ' : (char)l).ToString()
                     };
                     teclado.Children.Add(btt);
-                    if (!btt.Content.Equals('Ñ')) l++;
+                    if (!btt.Tag.Equals("Ñ")) l++;
                     Grid.SetColumn(btt,e);
                     Grid.SetRow(btt, i);
                 }
@@ -130,5 +181,6 @@ namespace ProyectoAhorcado
                 if (palabraSecreta[i] == letra) pal[i * 2] = letra;
             return pal.ToString();
         }
+
     }
 }

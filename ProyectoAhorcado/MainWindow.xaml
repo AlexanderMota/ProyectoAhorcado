@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoAhorcado"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="475" Width="750"
+        KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style TargetType="{x:Type DockPanel}">
             <Setter Property="Margin" Value="5"/>
@@ -13,6 +14,15 @@
         <Style TargetType="{x:Type Button}" x:Key="StBTeclado">
             <EventSetter Event="Click" Handler="Button_Click_Teclado"/>
             <Setter Property="Margin" Value="2.5"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        BlurRadius="10" 
+                        Direction="300" 
+                        RenderingBias="Performance" 
+                        ShadowDepth="0.5"/>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="{x:Type Button}" x:Key="StBOpc">
             <EventSetter Event="Click" Handler="Button_Click_Opciones"/>
@@ -20,13 +30,39 @@
             <Setter Property="DockPanel.Dock" Value="Left"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style TargetType="{x:Type Image}">
             <Setter Property="Stretch" Value="None"/>
+
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        BlurRadius="20" 
+                        Direction="315" 
+                        RenderingBias="Performance" 
+                        ShadowDepth="1"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
-    
-    <DockPanel>
+
+    <DockPanel
+        >
+        <DockPanel.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF0CEEBA"/>
+                <GradientStop Color="White" Offset="0.384"/>
+            </LinearGradientBrush>
+        </DockPanel.Background>
         <DockPanel
             DockPanel.Dock="Bottom"
             Height="80"
@@ -35,7 +71,7 @@
                 Content="Reiniciar"
                 Name="BRei"/>
             <Button Style="{StaticResource StBOpc}"
-                Content="Rendirse"
+                Content="Salir"
                 Name="BRen"/>
             <Viewbox  HorizontalAlignment="Right"
                 DockPanel.Dock="Right"
