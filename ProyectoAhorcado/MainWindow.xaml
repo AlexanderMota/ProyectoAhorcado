@@ -15,42 +15,6 @@
         <Style TargetType="{x:Type DockPanel}" x:Key="StDp">
             <Setter Property="Margin" Value="5"/>
         </Style>
-        <Style BasedOn="{StaticResource StDp}" TargetType="{x:Type DockPanel}" x:Key="StDpVictoria">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF0CEEBA"/>
-                        <GradientStop Color="White" Offset="0.384"/>
-                        <LinearGradientBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </LinearGradientBrush.RelativeTransform>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style BasedOn="{StaticResource StDp}" TargetType="{x:Type DockPanel}" x:Key="StDpDerrota">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFEE0C0C"/>
-                        <GradientStop Color="White" Offset="0.384"/>
-                        <LinearGradientBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </LinearGradientBrush.RelativeTransform>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <Style TargetType="{x:Type Button}" x:Key="StBTeclado">
             <EventSetter Event="Click" Handler="Button_Click_Teclado"/>
             <Setter Property="Margin" Value="2.5"/>
@@ -73,7 +37,7 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
         <Style TargetType="{x:Type Border}" x:Key="StB">
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="BorderBrush" Value="#FF000000"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="8"/>
@@ -84,6 +48,42 @@
                         Direction="270" 
                         RenderingBias="Performance" 
                         ShadowDepth="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style BasedOn="{StaticResource StB}" TargetType="{x:Type Border}" x:Key="StBVictoria">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF0CEEBA"/>
+                        <GradientStop Color="White" Offset="0.384"/>
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style BasedOn="{StaticResource StB}" TargetType="{x:Type Border}" x:Key="StBDerrota">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEE0C0C"/>
+                        <GradientStop Color="White" Offset="0.384"/>
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                    </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -124,8 +124,8 @@
             Style="{StaticResource StB}"
             Grid.Column="0"
             Grid.Row="0"
-                x:Name="Ahorcado"
-                Tag ="0">
+            x:Name="Ahorcado"
+            Tag ="0">
             <Border.Background>
                 <ImageBrush 
                         Stretch="Fill"
@@ -133,9 +133,9 @@
             </Border.Background>
         </Border>
         <DockPanel Style="{StaticResource StDp}"
-                Grid.Column="1"
-                Grid.Row="0"
-                Grid.ColumnSpan="2">
+            Grid.Column="1"
+            Grid.Row="0"
+            Grid.ColumnSpan="2">
             <Label
                 DockPanel.Dock="Top"
                 Content="Ahorcado" 
@@ -147,7 +147,6 @@
             </Viewbox>
             <Grid 
                 x:Name="teclado"
-                DockPanel.Dock="Bottom" 
                 MinHeight="100">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
