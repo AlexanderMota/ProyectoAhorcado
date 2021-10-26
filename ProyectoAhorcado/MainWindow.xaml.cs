@@ -121,7 +121,7 @@ namespace ProyectoAhorcado
         {
             Random gen = new Random();
             String[] palabras = File.ReadAllText(@"./datos/palabras.txt").Split('\n');
-            return palabras[gen.Next(0, palabras.Length)];
+            return palabras[gen.Next(1, palabras.Length - 1)];
         }
         public String EscondePalabra(String cadena)
         {
