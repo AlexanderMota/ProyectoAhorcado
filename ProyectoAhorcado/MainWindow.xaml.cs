@@ -121,14 +121,7 @@ namespace ProyectoAhorcado
         {
             Random gen = new Random();
             String[] palabras = File.ReadAllText(@"./datos/palabras.txt").Split('\n');
-            return palabras[gen.Next(1, palabras.Length - 1)];
-        }
-        public String EscondePalabra(String cadena)
-        {
-            StringBuilder cadenaMostrar = new StringBuilder("");
-            for (int i = 0; i < cadena.Length - 1; i++)
-                cadenaMostrar.Append(i < cadena.Length - 1 ? "_ " : "_");
-            return cadenaMostrar.ToString();
+            return palabras[gen.Next(0,palabras.Length - 1)];
         }
         public void SwitchTeclado(bool s)
         {
@@ -178,13 +171,20 @@ namespace ProyectoAhorcado
                 }
             }
         }
+        public String EscondePalabra(String cadena)
+        {
+            cadena = cadena.Replace("\r","");
+            StringBuilder cadenaMostrar = new StringBuilder("");
+            for (int i = 0; i < cadena.Length; i++)
+                cadenaMostrar.Append(i < cadena.Length - 1? "_ " : "_");
+            return cadenaMostrar.ToString();
+        }
         static String AñadeLetraAcertada(string palabraSecreta, String palabraMostrar, char letra)
         {
-            StringBuilder pal = new StringBuilder(palabraMostrar);
-            for (int i = 0; i < palabraSecreta.Length - 1; i++)
+            StringBuilder pal = new StringBuilder(palabraMostrar.Replace("\r",""));
+            for (int i = 0; i < palabraSecreta.Length; i++)
                 if (palabraSecreta[i] == letra) pal[i * 2] = letra;
             return pal.ToString();
         }
-
     }
 }
