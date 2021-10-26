@@ -9,8 +9,9 @@
         Height="475" Width="750"
         MinHeight="500" MinWidth="800"
         MaxHeight="1000" MaxWidth="1600"
-        KeyDown="Window_KeyDown">
-    <Window.Resources>
+        KeyDown="Window_KeyDown"
+            >
+            <Window.Resources>
         <Style TargetType="{x:Type DockPanel}" x:Key="StDp">
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -71,14 +72,16 @@
             <Setter Property="Height" Value="25"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>
-        <Style TargetType="{x:Type Image}">
-            <Setter Property="Stretch" Value="Fill"/>
-
+        <Style TargetType="{x:Type Border}" x:Key="StB">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="#FF000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Effect">
                 <Setter.Value>
                     <DropShadowEffect
                         BlurRadius="20" 
-                        Direction="315" 
+                        Direction="270" 
                         RenderingBias="Performance" 
                         ShadowDepth="1"/>
                 </Setter.Value>
@@ -86,11 +89,23 @@
         </Style>
     </Window.Resources>
 
-    <DockPanel Style="{StaticResource StDp}"
-               x:Name="DPPrincipal">
-        <DockPanel Style="{StaticResource StDp}"
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel 
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Style="{StaticResource StDp}"
             DockPanel.Dock="Bottom"
-            Height="80"
             LastChildFill="False">
             <Button Style="{StaticResource StBOpc}"
                 Content="Reiniciar"
@@ -102,18 +117,25 @@
                 DockPanel.Dock="Right"
                 Height="40" Width="180"
                 Margin="10">
-                <TextBlock x:Name="feedback"/>
+                <TextBlock x:Name="FeedbackA"/>
             </Viewbox>
         </DockPanel>
-        <DockPanel Style="{StaticResource StDp}"
-            DockPanel.Dock="Left"
-            Width="300">
-            <Image 
-                Tag= "0"
+        <Border 
+            Style="{StaticResource StB}"
+            Grid.Column="0"
+            Grid.Row="0"
                 x:Name="Ahorcado"
-                Source="/img/0.jpg"/>
-        </DockPanel>
-        <DockPanel Style="{StaticResource StDp}">
+                Tag ="0">
+            <Border.Background>
+                <ImageBrush 
+                        Stretch="Fill"
+                        ImageSource="/img/0.jpg"/>
+            </Border.Background>
+        </Border>
+        <DockPanel Style="{StaticResource StDp}"
+                Grid.Column="1"
+                Grid.Row="0"
+                Grid.ColumnSpan="2">
             <Label
                 DockPanel.Dock="Top"
                 Content="Ahorcado" 
@@ -121,9 +143,12 @@
                 FontWeight="Bold" 
                 FontStyle="Italic"/>
             <Viewbox DockPanel.Dock="Top" MaxHeight="200">
-                <TextBlock x:Name="Respuestas" TextWrapping="Wrap"/>
+                <TextBlock x:Name="VisorPalabra" TextWrapping="Wrap"/>
             </Viewbox>
-            <Grid x:Name="teclado" DockPanel.Dock="Bottom" MinHeight="100">
+            <Grid 
+                x:Name="teclado"
+                DockPanel.Dock="Bottom" 
+                MinHeight="100">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -142,5 +167,5 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </DockPanel>
-    </DockPanel>
+    </Grid>
 </Window>

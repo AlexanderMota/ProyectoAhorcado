@@ -39,17 +39,17 @@ namespace ProyectoAhorcado
                 ApagaTeclaTF(l);
                 if (Plb.Contains(l))
                 {
-                    Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(l));
-                    feedback.Text = "Si está";
+                    VisorPalabra.Text = AñadeLetraAcertada(Plb, VisorPalabra.Text.ToString(), char.Parse(l));
+                    FeedbackA.Text = "Si está";
                 }
                 else
                 {
-                    feedback.Text = "No está";
+                    FeedbackA.Text = "No está";
                     if (int.Parse(Ahorcado.Tag.ToString()) < 9)
                         CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
                     else Perdiste();
                 }
-                if (!Respuestas.Text.Contains("_")) Ganaste();
+                if (!VisorPalabra.Text.Contains("_")) Ganaste();
             }
         }
         private void Button_Click_Teclado(object sender, RoutedEventArgs e)
@@ -58,17 +58,17 @@ namespace ProyectoAhorcado
             char l = char.Parse(((Button)sender).Tag.ToString());
             if(Plb.Contains(l))
             {
-                Respuestas.Text = AñadeLetraAcertada(Plb, Respuestas.Text.ToString(), char.Parse(((Button)sender).Tag.ToString()));
-                feedback.Text = "Si está";
+                VisorPalabra.Text = AñadeLetraAcertada(Plb, VisorPalabra.Text.ToString(), char.Parse(((Button)sender).Tag.ToString()));
+                FeedbackA.Text = "Si está";
             }
             else
             {
-                feedback.Text = "No está";
+                FeedbackA.Text = "No está";
                 if (int.Parse(Ahorcado.Tag.ToString()) < 9) 
                     CambiaFoto(int.Parse(Ahorcado.Tag.ToString()) + 1);
                 else Perdiste();
             }
-            if (!Respuestas.Text.Contains("_")) Ganaste();
+            if (!VisorPalabra.Text.Contains("_")) Ganaste();
         }
         private void Button_Click_Opciones(object sender, RoutedEventArgs e)
         {
@@ -78,43 +78,42 @@ namespace ProyectoAhorcado
         public void Ganaste()
         {
             CambiaFoto(11);
-            Ahorcado.Tag = 0;
             SwitchTeclado(false);
-            feedback.Text = "Victoria!";
+            Ahorcado.Tag = 0;
+            FeedbackA.Text = "Victoria!";
             BRen.Background = Brushes.Green;
             BRei.Background = Brushes.Green;
-            DPPrincipal.Style = (Style)Resources["StDpVictoria"];
         }
         public void Perdiste()
         {
-            Ahorcado.Tag = 0;
+            CambiaFoto(10);
             SwitchTeclado(false);
-            feedback.Text = "Has perdido.";
+            Ahorcado.Tag = 0;
+            FeedbackA.Text = "Has perdido.";
             BRen.Background = Brushes.Red;
             BRei.Background = Brushes.Red;
-            DPPrincipal.Style = (Style)Resources["StDpDerrota"];
-            CambiaFoto(10);
         }
         public void Reinicia()
         {
             CambiaFoto(0);
+            CreaBotonesTeclado(3, 9);
             Plb = PalabraRandom();
             PlbMostrar = EscondePalabra(Plb);
-            Respuestas.Text = PlbMostrar;
-            feedback.Text = "";
+            VisorPalabra.Text = PlbMostrar;
+            FeedbackA.Text = "";
             BRen.Background = Brushes.White;
             BRei.Background = Brushes.White;
-            DPPrincipal.Style = (Style)Resources["StDp"];
-            CreaBotonesTeclado(3, 9);
         }
-        private void CambiaFoto(int foto)
+        private void CambiaFoto(int numFoto)
         {
-            Ahorcado.Tag = foto;
-            BitmapImage logo = new BitmapImage();
-            logo.BeginInit();
-            logo.UriSource = new Uri(@"pack://application:,,,/img/" + foto + ".jpg");
-            logo.EndInit();
-            Ahorcado.Source = logo;
+            Ahorcado.Tag = numFoto;
+            BitmapImage dirFoto = new BitmapImage();
+            dirFoto.BeginInit();
+            dirFoto.UriSource = new Uri(@"pack://application:,,,/img/" + numFoto + ".jpg");
+            dirFoto.EndInit();
+            
+            Ahorcado.Background = new ImageBrush(dirFoto);
+            
         }
         public String PalabraRandom()
         {
