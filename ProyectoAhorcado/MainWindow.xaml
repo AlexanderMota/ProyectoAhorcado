@@ -31,7 +31,6 @@
         <Style TargetType="{x:Type Button}" x:Key="StBOpc">
             <EventSetter Event="Click" Handler="Button_Click_Opciones"/>
             <Setter Property="Margin" Value="10"/>
-            <Setter Property="DockPanel.Dock" Value="Left"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="FontSize" Value="15"/>
@@ -51,7 +50,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style BasedOn="{StaticResource StB}" TargetType="{x:Type Border}" x:Key="StBVictoria">
+        <Style TargetType="{x:Type Grid}" x:Key="StG">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style BasedOn="{StaticResource StG}" TargetType="{x:Type Grid}" x:Key="StGVictoria">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -69,7 +71,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style BasedOn="{StaticResource StB}" TargetType="{x:Type Border}" x:Key="StBDerrota">
+        <Style BasedOn="{StaticResource StG}" TargetType="{x:Type Grid}" x:Key="StGDerrota">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -89,7 +91,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid >
+    <Grid x:Name="Contenedor">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>

@@ -83,7 +83,7 @@ namespace ProyectoAhorcado
             FeedbackA.Text = "Victoria!";
             BRen.Background = Brushes.Green;
             BRei.Background = Brushes.Green;
-            Ahorcado.Style = (Style)Resources["StBVictoria"];
+            Contenedor.Style = (Style)Resources["StGVictoria"];
         }
         public void Perdiste()
         {
@@ -93,7 +93,7 @@ namespace ProyectoAhorcado
             FeedbackA.Text = "Has perdido.";
             BRen.Background = Brushes.Red;
             BRei.Background = Brushes.Red;
-            Ahorcado.Style = (Style)Resources["StBDerrota"];
+            Contenedor.Style = (Style)Resources["StGDerrota"];
         }
         public void Reinicia()
         {
@@ -105,7 +105,7 @@ namespace ProyectoAhorcado
             FeedbackA.Text = "";
             BRen.Background = Brushes.White;
             BRei.Background = Brushes.White;
-            Ahorcado.Style = (Style)Resources["StB"];
+            Contenedor.Style = (Style)Resources["StG"];
         }
         private void CambiaFoto(int numFoto)
         {
@@ -116,7 +116,6 @@ namespace ProyectoAhorcado
             dirFoto.EndInit();
             
             Ahorcado.Background = new ImageBrush(dirFoto);
-            
         }
         public String PalabraRandom()
         {
