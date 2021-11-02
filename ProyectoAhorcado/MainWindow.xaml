@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoAhorcado"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Ahorcado" Icon="/img/128.ico" 
         Height="475" Width="750"
         MinHeight="500" MinWidth="800"
         MaxHeight="1000" MaxWidth="1600"
@@ -50,10 +50,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="{x:Type Grid}" x:Key="StG">
+        <Style TargetType="{x:Type Grid}">
             <Setter Property="Background" Value="White"/>
         </Style>
-        <Style BasedOn="{StaticResource StG}" TargetType="{x:Type Grid}" x:Key="StGVictoria">
+        <Style BasedOn="{StaticResource {x:Type Grid}}" TargetType="{x:Type Grid}" x:Key="StGVictoria">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -71,7 +71,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style BasedOn="{StaticResource StG}" TargetType="{x:Type Grid}" x:Key="StGDerrota">
+        <Style BasedOn="{StaticResource {x:Type Grid}}" TargetType="{x:Type Grid}" x:Key="StGDerrota">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
